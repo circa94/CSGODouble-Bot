@@ -2,7 +2,7 @@
 
 var initialBetAmount = 1;
 
-var mode = 'martingale'; // can be 'martingale' or 'anti-martingale' (WAT? https://en.wikipedia.org/wiki/Martingale_(betting_sys.. )
+var mode = 'martingale'; // 'martingale' or 'anti-martingale'  or 'superspecialtacticyoucantbelieve'
 
 var betColor = 'black'; // can be 'red' or 'black'
 
@@ -31,7 +31,15 @@ function printInfo() {
 }
 
 function rolled() {
-    return "anti-martingale" === mode ? void antiMartingale() : (martingale(), void currentRollNumber++)
+    if (mode === 'anti-martingale') {
+        antiMartingale();
+    } else if (mode === 'martingale') {
+        martingale();
+    } else if (mode === 'superspecialtacticyoucantbelieve') {
+        superspecialtacticyoucantbelieve();
+    }
+    currentRollNumber++;
+//    return "anti-martingale" === mode ? void antiMartingale() : (martingale(), void currentRollNumber++)
 }
 
 function antiMartingale() {
@@ -47,6 +55,22 @@ function martingale() {
     }
     currentBetAmount = wonLastRoll() ? initialBetAmount : 2 * currentBetAmount
 }
+
+
+function superspecialtacticyoucantbelieve() {
+    if (wonLastRoll()) {
+        earnedSoFar += (currentBetAmount * 2);
+    }
+    if (lastRollColor == "red") {
+        betColor = "red";
+    } else if (lastRollColor == "black") {
+        betColor = "black";
+    } else if (lastRollColor == "green") {
+        betColor = lastBetColor;
+    }
+    currentBetAmount = wonLastRoll() ? initialBetAmount : 2 * currentBetAmount
+}
+
 
 function bet() {
     checkBalance() && (setBetAmount(currentBetAmount), setTimeout(placeBet, 50))
