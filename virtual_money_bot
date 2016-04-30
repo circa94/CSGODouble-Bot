@@ -6,6 +6,8 @@ var mode = 'superspecialtacticyoucantbelieve'; // 'martingale' or 'anti-martinga
 
 var betColor = 'black'; // can be 'red' or 'black'
 
+
+
 var virtualCoins = 300000;
 
 //////////////////////////
